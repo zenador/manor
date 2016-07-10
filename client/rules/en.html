@@ -1,0 +1,188 @@
+<template name="ruleContent">
+<div id="ruleContent" class="textContent">
+
+	(To make it easier to visualise what happens in the game, this shall be described as if it were a regular tabletop game with physical components.)<br><br>
+
+	<h5>Pre-Setup</h5>
+
+	<ol class="type1">
+		<li>Decide on a turn limit.</li>
+		<li>Decide on house rules for tabletalk, and if any special rules should be applied.</li>
+	</ol>
+
+	<h5>Setup</h5>
+
+	You can skip this section if playing online.
+
+	<ol class="type1">
+		<li>
+
+			Assign Roles<br><br>
+
+			You can skip this step if using the offline version of the web app. ('Randomise' button)
+
+			<ol class="typea">
+				<li>Choose the role cards to be included in the game equal to the number of players (exactly 1 of {{_ "game.role.witness.name" }}, {{_ "game.role.police.name" }} and {{_ "game.role.murderer.name" }} must be included)</li>
+				<li>Shuffle the role cards and randomly deal 1 to each player face down</li>
+				<li>Players view their role cards secretly and keep them, not showing them to anyone else</li>
+			</ol>
+
+		</li><li>
+
+			Conduct Night Phase<br><br>
+
+			Have everyone close their eyes and put one fist on the table, and follow these steps (make sure to reset everyone to default closed eyes and thumbs down position in between steps):
+
+			<ol class="typea">
+				<li>Ask the {{_ "game.role.murderer.name" }} to put their thumb up and the {{_ "game.role.witness.name" }} to open their eyes and look for the {{_ "game.role.murderer.name" }}</li>
+				<li>If the {{_ "game.role.friend.name" }} is in the game, ask the {{_ "game.role.witness.name" }} to put their thumb up and the {{_ "game.role.friend.name" }} to open their eyes and look for the {{_ "game.role.witness.name" }}</li>
+				<li>If playing the 'Organised Crime' roleset (where the evil roles know who their teammates are), ask the {{_ "game.role.murderer.name" }} to put their thumb up and all players with either the {{_ "game.role.murderer.name" }} or {{_ "game.role.accomplice.name" }} role to open their eyes and look around</li>
+			</ol>
+
+		</li><li>
+
+			Prepare Board
+
+			<ol class="typea">
+				<li>Choose a map (suggested 2x2 or 2x3) and draw it on paper by dividing the space into equally sized rectangles representing rooms</li>
+				<li>Each player selects a unique colour to represent themselves (according to the characters on the action cards) and a small token of that colour</li>
+				<li>Randomly place the players' tokens representing their characters onto a map room</li>
+			</ol>
+
+		</li><li>
+
+			Prepare Cards<br><br>
+
+			If using the offline version of the web app, have every player press the 'Play Game' button on their device. Otherwise, give each player 1 of each movement card and 1 of each action card.
+
+		</li>
+
+	</ol>
+
+	<h5>Gameplay</h5>
+
+	Players always take their turns simultaneously. Each turn consists of 2 phases, whereby every player does the following:
+
+	<ol class="type1">
+
+		<li>
+
+			Movement Phase
+
+			<ol class="typea">
+				<li>Select 1 movement card (must either indicate a direction with an adjacent room or 'Stay') and place it face down</li>
+				<li>Wait until all other players (who are still alive in the game) have done the same</li>
+				<li>When everyone is ready, turn your selected movement card face up (at the same time with everyone else)</li>
+				<li>Resolve your movement by moving your token on the map to the adjacent room in the direction on your card</li>
+				<li>Return the played movement card to your hand</li>
+			</ol>
+
+		</li><li>
+
+			Action Phase<br><br>
+
+			Players whose tokens are the only ones in their current room must skip this phase for this turn, and simply observe the rest.
+
+			<ol class="typea">
+				<li>Select 5 action cards, arrange them in any order you like, and place them face down</li>
+				<li>Wait until all other players (who are still alive in the game, and with the exception as noted above) have done the same</li>
+				<li>When everyone is ready, show your selected action cards to all other players with tokens in the same map room as yours</li>
+				<li>If another player shows you a hand including your character card and an item card, that item takes effect on you, see 'Item Descriptions' below</li>
+				<li>Return the played action cards to your hand</li>
+			</ol>
+
+			Players are generally free to use any combination of action cards to express whatever they wish to the other players secretly. However, there are a few restrictions governing the use of item cards, which have a special effect if played:
+
+			<ol class="typei">
+				<li>You may not select more than 1 item card (but you can choose not to use any item cards)</li>
+				<li>Only certain roles can use certain item cards, subject to certain restrictions (please refer to 'Item Descriptions' below)</li>
+				<li>If you select an item card, you must also select exactly 1 character card (must correspond to another living character in the same room - not yourself)</li>
+			</ol>
+
+			Item Descriptions<br><br>
+
+			<table>
+				<tr>
+					<td>Item Name</td>
+					<td>Description</td>
+					<td>Effect if used on you</td>
+				</tr><tr>
+					<td>{{_ "game.item.handcuffs.name" }}</td>
+					<td>{{_ "game.item.handcuffs.desc" }}</td>
+					<td>You are arrested, the game is over, and players' win conditions are evaluated</td>
+				</tr><tr>
+					<td>{{_ "game.item.knife.name" }}</td>
+					<td>{{_ "game.item.knife.desc" }}</td>
+					<td>Unless shielded that turn, you die immediately and may not take any more turns.</td>
+				</tr><tr>
+					<td>{{_ "game.item.poison.name" }}</td>
+					<td>{{_ "game.item.poison.desc" }}</td>
+					<td>Unless shielded that turn, you die 2 turns later, e.g. if poisoned during turn 2, you die at the end of turn 4. However, as your actual character is unaware of being posioned, you are NOT allowed to say anything to the others about your poisoned status.</td>
+				</tr><tr>
+					<td>{{_ "game.item.shield.name" }}</td>
+					<td>{{_ "game.item.shield.desc" }}</td>
+					<td> You are shielded for that turn, and knives and poison have no effect for this turn only. (The shield is symbolic, and signifies the bodyguard defending you in some way.)</td>
+				</tr>
+			</table>
+
+		</li>
+
+	</ol>
+
+	<h5>Game Over</h5>
+
+	When does the game end?
+
+	<ul>
+		<li>When the police arrests a character; OR</li>
+		<li>When the murderer tries to use a knife or poison on the police (foiled attempt -> automatic arrest); OR</li>
+		<li>When the turn count exceeds the turn limit (murderer manages to escape), e.g. if the turn limit is 10, the game ends at the end of turn 10</li>
+	</ul>
+
+	After that, players' win conditions are individually evaluated.<br><br>
+
+	<h5>Tabletalk</h5>
+
+	<ul>
+		<li>Up to you as long as it is consistent throughout the game for everyone and there is no private talk besides the use of action cards</li>
+		<li>However, it is preferable to forbid players from mentioning anything that can be or was conveyed through action cards, e.g. you can't say "Red is the murderer" or "Blue said that Red is the murderer", but you can say "Really? You must be lying" to someone who just showed you action cards</li>
+	</ul>
+
+	<h5>Role Descriptions</h5>
+
+	<table>
+		<tr>
+			<td>{{_ "game.role.witness.name" }}</td>
+			<td>{{_ "game.role.witness.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.police.name" }}</td>
+			<td>{{_ "game.role.police.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.murderer.name" }}</td>
+			<td>{{_ "game.role.murderer.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.psycho.name" }}</td>
+			<td>{{_ "game.role.psycho.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.martyr.name" }}</td>
+			<td>{{_ "game.role.martyr.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.goodteam.name" }}</td>
+			<td>{{_ "game.role.goodteam.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.badteam.name" }}</td>
+			<td>{{_ "game.role.badteam.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.accomplice.name" }}</td>
+			<td>{{_ "game.role.accomplice.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.bodyguard.name" }}</td>
+			<td>{{_ "game.role.bodyguard.desc" }}</td>
+		</tr><tr>
+			<td>{{_ "game.role.friend.name" }}</td>
+			<td>{{_ "game.role.friend.desc" }}</td>
+		</tr>
+	</table>
+
+</div>
+</template>

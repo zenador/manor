@@ -1,0 +1,277 @@
+body {
+	font-family: 'Open Sans', Calibri, Helvetica, Verdana, Tahoma, Arial, sans-serif;
+	font-size: 90%;
+	padding: 1em;
+}
+
+h2 {
+	font-size: 160%;
+}
+
+h3 {
+	font-size: 130%;
+}
+
+h5 {
+	font-size: 110%;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.hidden {
+	display: none;
+}
+
+.disabled {
+	pointer-events: none;
+}
+
+.buttonrow {
+	margin: 1em 0;
+}
+
+.label {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+#action, .textContent {
+	display: none;
+}
+
+#startmenu h3, #footer {
+	margin-top: 1em;
+}
+
+#lobby .accessCode, #hostBox, #lobby #log, #audience_list, #display_room, #randomise h5 {
+	margin-bottom: 1em;
+}
+
+#lobby #chat, #lobby #roleBox, #waiting_list {
+	margin: 1em 0;
+}
+
+.card {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	width: 90px;
+	height: 150px;
+	border: 1px solid black;
+	background-color: gray;
+	opacity: 0.5;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.card.selected, .card.highlighted {
+	opacity: 1;
+}
+
+.instructions {
+	margin-bottom: 1em;
+}
+
+#chat, #log {
+	background-color: #eee;
+}
+
+#map {
+	width: 400px;
+}
+
+.room {
+	display: inline-block;
+	vertical-align: top;
+	width: 200px;
+	height: 200px;
+	box-sizing: border-box;
+	border: 1px solid black;
+	text-align: center;
+}
+
+.room .label {
+	font-size: 350%;
+	opacity: 0.1;
+}
+
+#display_room ul, #waiting_list ul, #audience_list ul, #map .room ul {
+	list-style: none;
+}
+
+#map .room ul {
+	text-align: left;
+	display: inline-block;
+}
+
+li.token:before {
+	content: '\2022';
+	padding: 10px;
+}
+li.token .card {
+	color: black;
+	text-shadow: none;
+}
+.token {
+	/*-webkit-text-stroke: 1px black;*/
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		 1px 1px 0 #000;
+}
+.token.red {
+	color: red;
+}
+.token.green {
+	color: green;
+}
+.token.blue {
+	color: blue;
+}
+.token.yellow {
+	color: yellow;
+}
+.token.black {
+	color: black;
+}
+.token.white {
+	color: black;
+	-webkit-text-fill-color: white;
+}
+.token.grey {
+	color: gray;
+}
+.token.orange {
+	color: orange;
+}
+.token.purple {
+	color: purple;
+}
+.token.pink {
+	color: #f88;
+}
+.token.brown {
+	color: #A52A2A;
+}
+
+textarea#roleList {
+	width: 200px;
+	height: 200px;
+}
+
+button.secret {
+	display: block;
+	color: white;
+	border: 0;
+	border-radius: 1em;
+	width: 11em;
+	padding: 0.3em 0;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+button.secret.disabled {
+	opacity: 0.1;
+	text-decoration: line-through;
+}
+
+button.secret.i1 {
+	background-color: red;
+}
+button.secret.i2 {
+	background-color: green;
+}
+button.secret.i3 {
+	background-color: blue;
+}
+button.secret.i4 {
+	background-color: yellow;
+	color: black;
+}
+button.secret.i5 {
+	background-color: black;
+}
+button.secret.i6 {
+	background-color: white;
+	color: black;
+}
+button.secret.i7 {
+	background-color: gray;
+}
+button.secret.i8 {
+	background-color: orange;
+}
+button.secret.i9 {
+	background-color: purple;
+}
+button.secret.i10 {
+	background-color: #f88;
+}
+button.secret.i11 {
+	background-color: #A52A2A;
+}
+
+button.btn-tooltip {
+	background: transparent url('images/glyphicons-196-circle-info.png') no-repeat center;
+	background-size: contain;
+	border: 0;
+	width: 20px;
+	height: 20px;
+	pointer-events: auto;
+}
+
+.textContent, #infoBox {
+	background-color: #eee;
+	padding: 2em;
+}
+
+.textContent ol, .textContent ul {
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 4em;
+}
+
+.textContent ol.type1 {
+	list-style-type: decimal;
+}
+
+.textContent ol.typea {
+	list-style-type: lower-alpha;
+}
+
+.textContent ol.typei {
+	list-style-type: lower-roman;
+}
+
+.textContent ul {
+	list-style-type: disc;
+}
+
+.textContent td {
+	padding: 0.5em;
+	background-color: white;
+}
+
+.textContent h5 {
+	font-size: 120%;
+	margin-bottom: 1em;
+}

@@ -1,0 +1,291 @@
+{
+	"ui": {
+		"instruction": {
+			"action": {
+				"before move": "<strong>Action Phase</strong>: Select 4 action cards to show to every character in the room. (The order in which you select them indicates the order in which they will be displayed to others.)",
+				"during move": "<strong>Action Phase</strong>: Wait for other players to finish choosing their action cards.",
+				"after move": "<strong>Action Phase</strong>: Show these cards to every character in the same room as yours.",
+				"dead move": "<strong>Action Phase</strong>: You can't choose any cards as you are dead. You may wait and watch.",
+				"empty move": "<strong>Action Phase</strong>: You don't have to choose any cards as there are no other living characters in this room. Please wait."
+			},
+			"movement": {
+				"before move": "<strong>Movement Phase</strong>: Select 1 movement card to indicate the direction in which you want to move.",
+				"during move": "<strong>Movement Phase</strong>: Wait for other players to finish choosing their movement cards.",
+				"after move": "<strong>Movement Phase</strong>: Show this movement card to everyone and resolve your movement.",
+				"dead move": "<strong>Movement Phase</strong>: You can't choose any cards as you are dead. You may wait and watch."
+			}
+		},
+		"validation": {
+			"action": {
+				"only num action cards": "Sorry, please select only %s action cards.",
+				"not your item": "Your character cannot use this item.",
+				"exactly num action cards": "Sorry, please select exactly %s action cards.",
+				"max 1 item card": "Sorry, you cannot select more than 1 item card.",
+				"exactly 1 character card": "Sorry, you must select exactly 1 character card when using an item card.",
+				"use item on self": "You cannot use an item on yourself.",
+				"use item on gone": "You can only use items on characters in the same room as yours.",
+				"use item on dead": "You cannot only use items on dead characters.",
+				"use item on nonexistent": "You cannot use an item on a character who is not in this game.",
+				"min characters for shield": "Sorry, there must be at least 2 other living characters in this room when you use the shield."
+			},
+			"movement": {
+				"illegal": "This move is illegal.",
+				"exactly 1 card": "Sorry, please select exactly 1 movement card."
+			}, 
+			"form": {
+				"player name": "Please enter a player name.",
+				"access code": "Sorry, your access code is invalid.",
+				"game already started": "Sorry, you can't join a game after it has already started."
+			},
+			"start game min": "You need at least %s players to start a game.",
+			"start game max": "You cannot have more than %s players when starting a game."
+		},
+		"form": {
+			"player name": {
+				"placeholder": "Your Name"
+			},
+			"access code": {
+				"placeholder": "Access Code"
+			},
+			"enter msg": {
+				"placeholder": "enter your msg here"
+			}
+		},
+		"title": {
+			"game title": "Manor",
+			"game subtitle": "A hidden identity team game",
+			"online": "Online",
+			"offline": "Offline",
+			"game over": "Game Over!",
+			"access code": "Access Code",
+			"players": "Players",
+			"game options": "Game Options",
+			"map": "Map",
+			"radar mode": "Radar/CCTV Mode",
+			"turn limit": "Turn Limit",
+			"role set": "Role Set",
+			"eyewitness condition": "Requires Eyewitness",
+			"current roles": "Current Roles",
+			"what you know": "What you know",
+			"waiting list": "Waiting for these players to make their move",
+			"display room": "Other characters in this room",
+			"empty": "None",
+			"turn": "Turn",
+			"role": "Role",
+			"character": "Character",
+			"misc": "Misc",
+			"item": "Item",
+			"true": "True",
+			"false": "False",
+			"randomise": "Randomly assign roles to players",
+			"no of players": "Number of Players",
+			"list of roles": "List of Roles"
+		},
+		"button": {
+			"start menu": {
+				"new game": "New Game",
+				"join game": "Join Game",
+				"play game": "Play Game",
+				"randomise": "Randomise",
+				"go shuffle": "Go!",
+				"back to menu": "Back",
+				"intro": "Intro",
+				"rules": "Rules"
+			},
+			"game menu": {
+				"start game": "Start Game",
+				"leave game": "Leave Game",
+				"hide info": "Hide Info",
+				"show info": "Show Info"
+			},
+			"action": {
+				"reset": "Reset",
+				"skip": "Skip",
+				"submit": "Show cards",
+				"next": "Next"
+			},
+			"movement": {
+				"reset": "Reset",
+				"skip": "Skip",
+				"submit": "Move",
+				"next": "Next"
+			}
+		},
+		"tooltip": {
+			"game options": {
+				"map": "'Four Rooms' is recommended for 8 players and below, 'Six Rooms' otherwise.",
+				"radar mode": "If on, players will see where every other player is. If off, players will only know which other players are in the same room as they are.",
+				"turn limit": "If the police doesn't make an arrest within this number of turns, the murderer will automatically win by escaping.",
+				"role set": "Choose the roles to be included in this game.",
+				"eyewitness condition": "If on, besides needing to arrest the murderer, the good side must also ensure there is at least one good/neutral eyewitness who is not dead/dying at the end of the game."
+			}
+		},
+		"update": {
+			"escape": "The murderer has managed to escape after %s turns.",
+			"player left": "The game has automatically ended as a player has left.",
+			"self poison": "You have been poisoned! But you don't know it yet. Shh. (1 turn left)",
+			"self poison_plural": "You have been poisoned! But you don't know it yet. Shh. (__count__ turns left)",
+			"self dead": "You are now dead!",
+			"other dead": "<span class='token __kter__'>__name__</span> is now dead.",
+			"arrested": "<span class='token __arrester.character.id__'>__arrester.name__</span> has arrested <span class='token __suspect.character.id__'>__suspect.name__</span>.",
+			"arrested kill": "<span class='token __arrester.character.id__'>__arrester.name__</span> has arrested <span class='token __suspect.character.id__'>__suspect.name__</span> who just tried to kill him.",
+			"no eyewitness": "There is no eyewitness willing and able to testify against the murderer, and in the absence of other strong evidence, the murderer was found not guilty."
+		},
+		"dialog": {
+			"host close window": "As you are the game host, please manually leave the game first to avoid causing problems for the other users.",
+			"player close window": "If you want to leave the game, please press the 'Leave Game' button first. Otherwise, you will remain in the game, just open another window in the same browser to resume.",
+			"player leave game": "This action will end the game for all players. Are you sure you want to leave?"
+		},
+		"player info": {
+			"winner": "winner",
+			"loser": "loser",
+			"eyewitness": "eyewitness",
+			"good": "good",
+			"bad": "bad",
+			"neutral": "neutral",
+			"host": "host",
+			"dead": "dead",
+			"dying": "dying",
+			"you": "you"
+		}
+	},
+	"game": {
+		"role": {
+			"witness": {
+				"name": "Witness",
+				"desc": "Good Team. x1. Knows murderer. Needs to help police arrest murderer and avoid getting killed."
+			},
+			"police": {
+				"name": "Police",
+				"desc": "Good Team. x1. Can arrest other characters. Cannot be killed, and automatically arrests the attacker. Needs to arrest murderer."
+			},
+			"murderer": {
+				"name": "Murderer",
+				"desc": "Bad Team. x1. Can kill other characters. Knows accomplices if any. Needs to avoid arrest."
+			},
+			"psycho": {
+				"name": "Harmless Psycho",
+				"desc": "Neutral. x0-1. Needs to get arrested."
+			},
+			"martyr": {
+				"name": "Martyr",
+				"desc": "Neutral. x0-1. Needs to get killed."
+			},
+			"goodteam": {
+				"name": "Victim Sympathiser",
+				"desc": "Good Team. x0-many. Needs to help police arrest murderer and avoid getting killed."
+			},
+			"badteam": {
+				"name": "Murderer Sympathiser",
+				"desc": "Bad Team. x0-many. Needs to prevent murderer and self from getting arrested, and avoid getting killed."
+			},
+			"accomplice": {
+				"name": "Accomplice",
+				"desc": "Bad Team. x0-many. Knows murderer and other accomplices if any. Needs to prevent murderer and self from getting arrested, and avoid getting killed."
+			},
+			"bodyguard": {
+				"name": "Bodyguard",
+				"desc": "Neutral. x0-many. Can protect other characters. Cannot be killed. Needs to prevent witness from getting killed and self from getting arrested."
+			},
+			"friend": {
+				"name": "Witness' Secret Friend",
+				"desc": "Good Team. x0-1. Knows witness. Needs to help police arrest murderer and avoid getting killed."
+			}
+		},
+		"role set": {
+			"organised": "Organised Crime",
+			"disorganised": "Disorganised Crime"
+		},
+		"character": {
+			"red": "Red",
+			"green": "Green",
+			"blue": "Blue",
+			"yellow": "Yellow",
+			"black": "Black",
+			"white": "White",
+			"grey": "Grey",
+			"orange": "Orange",
+			"purple": "Purple",
+			"pink": "Pink",
+			"brown": "Brown"
+		},
+		"item": {
+			"handcuffs": {
+				"name": "Handcuffs",
+				"desc": "Only the police can use this. Use this to arrest one character and end the game."
+			},
+			"knife": {
+				"name": "Knife",
+				"desc": "Only the murderer can use this. Use to kill one character immediately."
+			},
+			"poison": {
+				"name": "Poison",
+				"desc": "Only the murderer can use this. Use to make one character die after 2 turns."
+			},
+			"shield": {
+				"name": "Shield",
+				"desc": "Only the bodyguard can use this. Use to prevent murderer's knife or poison action from taking effect on one character in the current room for the current turn."
+			}
+		},
+		"card": {
+			"is": "Is",
+			"isnot": "Is Not",
+			"question": "?",
+			"know": "I know",
+			"sure": "I'm sure",
+			"infer": "I infer",
+			"believe": "I believe",
+			"think": "I think",
+			"guess": "I guess",
+			"hope": "I hope",
+			"said": "Said",
+			"extra1": "Extra #1",
+			"extra2": "Extra #2",
+			"extra3": "Extra #3"
+		},
+		"movement": {
+			"stay": {
+				"name": "Stay",
+				"desc": ""
+			},
+			"up": {
+				"name": "Up",
+				"desc": ""
+			},
+			"down": {
+				"name": "Down",
+				"desc": ""
+			},
+			"left": {
+				"name": "Left",
+				"desc": ""
+			},
+			"right": {
+				"name": "Right",
+				"desc": ""
+			}
+		},
+		"map": {
+			"fourroom": {
+				"name": "Four Rooms",
+				"room": {
+					"one": "One",
+					"two": "Two",
+					"three": "Three",
+					"four": "Four"
+				}
+			},
+			"sixroom": {
+				"name": "Six Rooms",
+				"room": {
+					"one": "One",
+					"two": "Two",
+					"three": "Three",
+					"four": "Four",
+					"five": "Five",
+					"six": "Six"
+				}
+			}
+		}
+	}
+}

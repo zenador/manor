@@ -1,0 +1,401 @@
+<head>
+	<title>Manor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body></body>
+
+<template name="main">
+<div id="main">
+	{{> flashMessages}}
+	{{> tooltips}}
+	{{> Template.dynamic template=whichView}}
+	{{> ruleBox}}
+	{{> footer}}
+</div>
+</template>
+
+<template name="startmenu">
+<div id="startmenu">
+	<h2>{{_ "ui.title.game title" }}</h2>
+	{{_ "ui.title.game subtitle" }}
+
+	<h3>{{_ "ui.title.online" }}</h3>
+	<input type="text" id="playername" name="playerName" placeholder='{{_ "ui.form.player name.placeholder" }}' value='{{playerName}}'>
+	<input autocorrect="off" autocapitalize="off" type="text" id="accessCode" name="accessCode" placeholder='{{_ "ui.form.access code.placeholder" }}' value='{{accessCode}}'>
+	<div class="buttonrow">
+		<button id="newgame" class="btn btn-success">{{_ "ui.button.start menu.new game" }}</button>
+		<button id="joingame" class="btn btn-info">{{_ "ui.button.start menu.join game" }}</button>
+	</div>
+	<h3>{{_ "ui.title.offline" }}</h3>
+	<div class="buttonrow">
+		<button id="playgame" class="btn btn-warning">{{_ "ui.button.start menu.play game" }}</button>
+		<button id="randomise" class="btn btn-danger">{{_ "ui.button.start menu.randomise" }}</button>
+	</div>
+</div>
+</template>
+
+<template name="lobby">
+<div id="lobby">
+	{{#if isGameState 'inProgress'}}
+	
+		{{> infoBox}}
+		{{> chat}}
+		{{> log}}
+		{{> turn_number}}
+		{{> movement_pick}}
+		{{> action_pick}}
+		{{> map}}
+		{{> game_menu}}
+
+	{{else}} {{#if isGameState 'over'}}
+
+		{{> chat}}
+		{{> log}}
+		<h5>{{_ "ui.title.game over" }}</h5>
+		<ul>{{#each players}}{{> tokensEnd}}{{/each}}</ul>
+		{{> game_menu}}
+
+	{{else}}
+
+		<div class="accessCode">
+			{{_ "ui.title.access code" }}: {{accessCode}}
+		</div><div class="playerList">
+			{{_ "ui.title.players" }}:
+			<ul>
+			{{#each players}}
+				<li>
+					{{name}}<!-- : {{_ role.name}} {{_ character.name}} {{room}} -->
+				</li>
+			{{/each}}
+			</ul>
+		</div>
+
+		{{> chat}}
+
+		{{#if isCreator}}
+			{{> gameOptions}}
+		{{else}}
+			{{> gameInfo}}
+		{{/if}}
+
+		{{> roleBox}}
+
+		<div class="buttonrow">
+			{{#if isCreator}}
+			<button id="startgame" class="btn btn-success">{{_ "ui.button.game menu.start game" }}</button>
+			{{/if}}
+			<button class="btn btn-danger leavegame inlobby">{{_ "ui.button.game menu.leave game" }}</button>
+		</div>
+
+	{{/if}} {{/if}}
+</div>
+</template>
+
+<template name="ingame">
+	{{> movement_pick}}
+	{{> action_pick}}
+	{{> game_menu}}
+</template>
+
+<template name="movement_pick">
+<div id="movement">
+	<div class="instructions">{{{_ "ui.instruction.movement.before move"}}}</div>
+	{{#if isGameOnline}}
+		{{> display_room}}
+	{{/if}}
+	{{#each movements}}{{> card type="movement" obj=this}}{{/each}}
+	<div class="buttonrow">
+		<!--<button class="btn btn-warning reset before_move">&#8635; {{_ "ui.button.movement.reset"}}</button>-->
+		{{#unless isGameOnline}}
+		<button class="btn btn-info skip before_move">&raquo; {{_ "ui.button.movement.skip"}}</button>
+		{{/unless}}
+		<button class="btn btn-success submit before_move">&#9658; {{_ "ui.button.movement.submit"}}</button>
+		<button class="btn btn-success next after_move">&#9658; {{_ "ui.button.movement.next"}}</button>
+	</div>
+	{{#if isGameOnline}}
+		{{> waiting_list phase="movement"}}
+	{{/if}}
+</div>
+</template>
+
+<template name="action_pick">
+<div id="action">
+	<div class="instructions">{{{_ "ui.instruction.action.before move"}}}</div>
+	{{#if isGameOnline}}
+		{{> audience_list}}
+	{{/if}}
+	<h5>{{_ "ui.title.role" }}</h5><!--
+	-->{{#each roles}}{{> card type="role" obj=this}}{{/each}}<!--
+	--><h5>{{_ "ui.title.character" }}</h5><!--
+	-->{{#each characters}}{{> card type="character" obj=this}}{{/each}}<!--
+	--><h5>{{_ "ui.title.misc" }}</h5><!--
+	-->{{#each miscards}}{{> card type="misc" obj=this}}{{/each}}<!--
+	--><h5>{{_ "ui.title.item" }}</h5><!--
+	-->{{#each items}}{{> card type="item" obj=this}}{{/each}}
+	{{> my_display_room}}
+	<div class="buttonrow">
+		<button class="btn btn-warning reset before_move">&#8635; {{_ "ui.button.action.reset"}}</button>
+		{{#unless isGameOnline}}
+		<button class="btn btn-info skip before_move">&raquo; {{_ "ui.button.action.skip"}}</button>
+		{{/unless}}
+		<button class="btn btn-success submit before_move">&#9658; {{_ "ui.button.action.submit"}}</button>
+		<button class="btn btn-success next after_move">&#9658; {{_ "ui.button.action.next"}}</button>
+	</div>
+	{{#if isGameOnline}}
+		{{> waiting_list phase="action"}}
+	{{/if}}
+</div>
+</template>
+
+<template name="game_menu">
+	<div class="buttonrow">
+		<button class="btn btn-danger leavegame ingame">&#9632; {{_ "ui.button.game menu.leave game" }}</button>
+	</div>
+</template>
+
+<template name="infoBox">
+	<div id="infoBox">
+		{{#if equals isCreator true}}{{> hostBox}}{{/if}}
+		{{> gameInfo}}
+		{{> roleBox}}
+		<h5>{{_ "ui.title.what you know" }}</h5>
+		<ul>{{#each knownPlayers}}{{> tokensKnown}}{{/each}}</ul>
+	</div>
+
+	<div class="buttonrow">
+		<button id="toggleinfo" class="btn btn-warning">{{_ "ui.button.game menu.hide info" }}</button>
+	</div>
+</template>
+
+<template name="hostBox">
+<div id="hostBox">
+	You are the game host. For the game to run smoothly, please ensure that this browser tab is always running throughout the game, and that you do not open more than one tab connected to this game.
+</div>
+</template>
+
+<template name="roleBox">
+<div id="roleBox">
+	<h5>{{_ "ui.title.current roles" }}</h5>
+	<ul>{{#each currentRoles}}<li>{{> tooltippy text=tooltip}} {{_ name}}</li>{{/each}}</ul>
+</div>
+</template>
+
+<template name="gameInfo">
+<div id="gameInfo">
+	<h5>{{_ "ui.title.game options" }}</h5>
+	<ul class="options">
+		<li>
+			{{> tooltippy text="ui.tooltip.game options.map"}}
+			{{_ "ui.title.map" }}: {{_ mapName}}
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.turn limit"}}
+			{{_ "ui.title.turn limit" }}: {{turnLimit}}
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.role set"}}
+			{{_ "ui.title.role set" }}: {{_ roleSet}}
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.radar mode"}}
+			{{_ "ui.title.radar mode" }}: {{isOnRadarMode}}
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.eyewitness condition"}}
+			{{_ "ui.title.eyewitness condition" }}: {{needsEyewitness}}
+		</li>
+	</ul>
+</div>
+</template>
+
+<template name="gameOptions">
+<div id="gameOptions">
+	<h5>{{_ "ui.title.game options" }}</h5>
+	<ul class="options">
+		<li>
+			{{> tooltippy text="ui.tooltip.game options.map"}}
+			{{_ "ui.title.map" }}
+			<select id="optionMap">
+				<option value="fourroom" selected={{mapNameSel "fourroom"}}>{{_ "game.map.fourroom.name" }}</option>
+				<option value="sixroom" selected={{mapNameSel "sixroom"}}>{{_ "game.map.sixroom.name" }}</option>
+			</select>
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.turn limit"}}
+			{{_ "ui.title.turn limit" }} <input id="turnLimit" type="text" value="{{turnLimit}}">
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.role set"}}
+			{{_ "ui.title.role set" }}
+			<select id="optionRoleSet">
+				<option value="disorganised" selected={{roleSetSel "disorganised"}}>{{_ "game.role set.disorganised" }}</option>
+				<option value="organised" selected={{roleSetSel "organised"}}>{{_ "game.role set.organised" }}</option>
+			</select>
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.radar mode"}}
+			{{_ "ui.title.radar mode" }} <input id="optionRadar" value="1" type="checkbox" checked={{isOnRadarModeVal}}>
+		</li><li>
+			{{> tooltippy text="ui.tooltip.game options.eyewitness condition"}}
+			{{_ "ui.title.eyewitness condition" }} <input id="optionEyewitness" value="1" type="checkbox" checked={{needsEyewitnessVal}}>
+		</li>
+	</ul>
+</div>
+</template>
+
+<template name="chat">
+<div id="chat">
+	<input type="text" id="msg" name="msg" placeholder='{{_ "ui.form.enter msg.placeholder" }}'>
+	<button id="sendmsg" class="btn btn-warning">&gt;</button>
+	<ul>
+	{{#each messages}}
+		<li>
+			{{sender}}: {{content}}
+		</li>
+	{{/each}}
+	</ul>
+</div>
+</template>
+
+<template name="log">
+<div id="log">
+	<ul>
+	{{#each logs}}
+		<li>{{{content}}}</li>
+	{{/each}}
+	</ul>
+</div>
+</template>
+
+<template name="turn_number">
+<div id="turn_number">
+	{{_ "ui.title.turn" }} {{turn}}<!-- - {{phase}} phase -->
+</div>
+</template>
+
+<template name="audience_list">
+<div id="audience_list">
+	{{_ "ui.title.display room" }}:<br>
+	{{#if isEmpty}}{{_ "ui.title.empty" }}{{/if}}
+	<ul>{{#each playersInSameRoom}}{{> tokensInGame}}{{/each}}</ul>
+</div>
+</template>
+
+<template name="waiting_list">
+<div id="waiting_list">
+	{{_ "ui.title.waiting list" }}:
+	<ul>{{#each listPlayersStillThinking phase}}{{> tokensInGame}}{{/each}}</ul>
+</div>
+</template>
+
+<template name="display_room">
+<div id="display_room">
+	{{_ "ui.title.display room" }}:<br>
+	{{#if isEmpty}}{{_ "ui.title.empty" }}{{/if}}
+	<ul>{{#each playersInSameRoom}}<li class="token {{_ character.id}}">{{name}} ({{_ character.name}})<br>{{#each cards_action}}{{#with getCard listname index}}{{> card type="disabled highlighted" obj=this}}{{/with}}{{/each}}</li>{{/each}}</ul>
+</div>
+</template>
+
+<template name="my_display_room">
+<div id="my_display_room">
+	{{#each cards_action}}{{#with getCard listname index}}{{> card type="disabled highlighted" obj=this}}{{/with}}{{/each}}
+</div>
+</template>
+
+<template name="tokensInGame">
+	<li class="token {{_ character.id}}">
+		{{name}} ({{_ character.name}})
+		{{#if isYou _id}}({{_ "ui.player info.you"}}){{/if}}
+		{{#if equals isCreator true}}({{_ "ui.player info.host"}}){{/if}}
+		{{#if equals state 0}}({{_ "ui.player info.dead"}}){{/if}}
+	</li>
+</template>
+
+<template name="tokensKnown">
+	<li class="token {{_ character.id}}">
+		{{name}} ({{_ character.name}}): {{_ role.name}}
+		{{#if isYou _id}}({{_ "ui.player info.you"}}){{/if}}
+	</li>
+</template>
+
+<template name="tokensEnd">
+	<li class="token {{_ character.id}}">
+		{{name}} ({{_ character.name}}): {{_ role.name}}
+		{{#if isYou _id}}({{_ "ui.player info.you"}}){{/if}}
+		{{#if equals isCreator true}}({{_ "ui.player info.host"}}){{/if}}
+		{{#if equals state 0}}({{_ "ui.player info.dead"}}){{/if}}
+		{{#if lessThan state 0}}({{_ "ui.player info.dying"}}){{/if}}
+		{{#if equals isGood 1}}({{_ "ui.player info.good"}}){{/if}}
+		{{#if equals isGood 0}}({{_ "ui.player info.neutral"}}){{/if}}
+		{{#if equals isGood -1}}({{_ "ui.player info.bad"}}){{/if}}
+		{{#if equals isEyewitness 1}}({{_ "ui.player info.eyewitness"}}){{/if}}
+		{{#if equals isWinner 1}}({{_ "ui.player info.winner"}}){{/if}}
+		{{#if equals isWinner -1}}({{_ "ui.player info.loser"}}){{/if}}
+	</li>
+</template>
+<!--
+<template name="tokens">
+	<li class="token {{_ character.id}}">
+		{{name}}: {{_ role.name}} {{_ character.name}} {{room}}
+		{{#if isYou _id}}({{_ "ui.player info.you"}}){{/if}}
+		{{#if equals isCreator true}}({{_ "ui.player info.host"}}){{/if}}
+		{{#if equals state 0}}({{_ "ui.player info.dead"}}){{/if}}
+		{{#if lessThan state 0}}({{_ "ui.player info.dying"}}){{/if}}
+		{{#if equals isWinner 1}}({{_ "ui.player info.winner"}}){{/if}}
+		{{#if equals isWinner -1}}({{_ "ui.player info.loser"}}){{/if}}
+	</li>
+</template>
+-->
+<template name="card">
+	<div class="card {{type}}" id="{{obj.id}}" data-index="{{obj.index}}" data-listname="{{obj.listname}}"><span class="label">{{#if obj.cardtip}}{{> tooltippy text=obj.cardtip}} {{/if}}{{#if obj.symbol}}{{{_ obj.symbol}}} {{/if}}{{_ obj.name}}</span></div>
+</template>
+
+<template name="tooltippy">
+	<button class="btn-tooltip" data-tooltip="{{_ text}}" data-tooltip-direction="e"></button>
+</template>
+
+<template name="map">
+<div id="map">
+	{{#each currentMap}}<div class="room">
+			<div class="label">{{_ label}}</div>
+			<ul>{{#each players index}}{{> tokensInGame}}{{/each}}</ul>
+	</div>{{/each}}
+</div>
+</template>
+
+<template name="randomise">
+<div id="randomise">
+	<h5>{{_ "ui.title.randomise" }}</h5>
+
+	<div id="randomForm">
+		{{_ "ui.title.no of players" }}<br>
+		<select id="numPlayers">
+			{{#each numPlayers}}<option value="{{this}}">{{this}}</option>{{/each}}
+		</select><br><br>
+
+		{{_ "ui.title.list of roles" }}<br>
+		<textarea id="roleList">{{roleList}}</textarea>
+	</div>
+
+	{{#each randomList}}
+		<button class="secret tapToShow i{{index}}" data-value="{{value}}">{{index}}</button>
+	{{/each}}
+
+	<div class="buttonrow">
+		<button id="goshuffle" class="btn btn-success">{{_ "ui.button.start menu.go shuffle" }}</button>
+		<button id="backtomenu" class="btn btn-info">{{_ "ui.button.start menu.back to menu" }}</button>
+	</div>
+</div>
+</template>
+
+<template name="ruleBox">
+<div id="ruleBox">
+	<div class="buttonrow">
+		<button id="toggleIntro" class="btn btn-primary">{{_ "ui.button.start menu.intro" }}</button>
+		<button id="toggleRules" class="btn btn-primary">{{_ "ui.button.start menu.rules" }}</button>
+	</div>
+	{{> introContent}}
+	{{> ruleContent}}
+</div>
+</template>
+
+<template name="footer">
+<div id="footer">
+	Version {{versionNo}}. Copyright &copy; 2015 Zenador. All rights reserved. Free to play.<br>
+	<a href="http://nightphase.herokuapp.com/" target="_blank">Hidden role games</a> | <a href="http://codenamesgame.herokuapp.com/" target="_blank">Codenames</a> | <a href="http://quiztimegame.herokuapp.com/" target="_blank">Psych/Fibbage</a> | <a href="http://perceivegame.herokuapp.com/" target="_blank">Perceive</a>
+</div>
+</template>
