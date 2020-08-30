@@ -1,0 +1,23 @@
+{
+  "name": "manor",
+  "version": "1.0.0",
+  "description": "A hidden identity team game where the police tries to find a murderer with the help of a witness. More details can be found in the link below.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zenador/manor.git"
+  },
+  "author": "Zenador",
+  "license": "MIT",
+  "homepage": "https://github.com/zenador/manor#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.11.2"
+  }
+}
